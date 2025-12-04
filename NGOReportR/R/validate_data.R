@@ -6,12 +6,8 @@
 
 # Checks the data type and missing values
 #'@export
-  validate_data <- function(data) {
-    cli::cli_h1("Validation")
-    skim_summary <- skimr::skim(data)
-    print(skim_summary)
-  }
-
-
-
-
+validate_data <- function(data) {
+  cli::cli_h1("Validation")
+  skim_summary <- skimr::skim(data)
+  print(skim_summary)
+}

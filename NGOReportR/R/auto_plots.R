@@ -136,3 +136,27 @@ combine_auto_plots <- function(data) {
 
   return(combined_plot)
 }
+
+  #' Print all of the plots as a PDF
+  #'
+  #' @param data A dataset
+  #' @param filename Name of the output PDF file
+  #' @export
+  export_auto_plots_pdf <- function(data, filename = "auto_plots.pdf") {
+
+    combined_plot <- combine_auto_plots(data)
+
+    ggplot2::ggsave(
+      filename,
+      plot = combined_plot,
+      device = "pdf",
+      width = 8,
+      height = 12
+    )
+
+    cli::cli_alert_success(paste("Automatic plots saved to", filename))
+
+  }
+
+
+

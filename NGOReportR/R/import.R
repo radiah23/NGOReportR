@@ -12,5 +12,7 @@
 #' @importFrom modelsummary modelsummary
 #' @importFrom gtsummary tbl_regression
 #' @importFrom glue glue
+#' @importFrom stats as.formula
+#' @importFrom qdap qdap
 
 NULL
