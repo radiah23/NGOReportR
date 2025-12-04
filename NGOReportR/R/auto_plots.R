@@ -1,24 +1,22 @@
-#' Visualize the data with automatic plots
+#' Summarize Average Amount by Year
 #'
-#' @param data A data frame containing the uploaded dataset.
-#' @param x Column name for the x-axis (default is NULL).
-#' @param y Column name for the y-axis (default is NULL).
-#' @return A ggplot object containing the generated plots.
+#' @param data A dataset
+#' @param x Name of year column (string)
+#' @param y Name of amount column (string)
+#' @return A ggplot object
 #' @export
-#' #Numerical data (Year, Amount: This histogram will have the average amount per year with a trend line)
-#' x axis = Year
-#' y axis = Amount
-
 summarize_amount_avg_year <- function(data, x = NULL, y = NULL) {
   if (is.null(x) || is.null(y)) {
     stop("Please provide column names.")
   }
+
   summary_tbl_yr_amount <- data %>%
     dplyr::group_by(.data[[x]]) %>%
     dplyr::summarise(
       avg_value = mean(.data[[y]], na.rm = TRUE),
       .groups = "drop"
     )
+
   p1 <- ggplot2::ggplot(
     summary_tbl_yr_amount,
     ggplot2::aes(x = .data[[x]], y = avg_value)
@@ -32,51 +30,55 @@ summarize_amount_avg_year <- function(data, x = NULL, y = NULL) {
     ) +
     ggplot2::theme_minimal()
 
-  return(plot = p1
-  )
+  return(p1)
 }
 
-
-
-#' #Categorical data (Location: This bar plot will show the count of records per location)
-#' x axis = Location
-#' y axis = Count of grants
+#' Summarize Location Count
+#'
+#' @param data A dataset
+#' @param x Name of location column (string)
+#' @return A ggplot object
+#' @export
 summarize_location_count <- function(data, x = NULL) {
   if (is.null(x)) {
     stop("Please provide a column name.")
   }
+
   summary_tbl_location <- data %>%
     dplyr::group_by(.data[[x]]) %>%
     dplyr::summarise(
-      count = n(),
+      count = dplyr::n(),
       .groups = "drop"
     )
+
   p2 <- ggplot2::ggplot(
     summary_tbl_location,
     ggplot2::aes(x = .data[[x]], y = count)
   ) +
-    ggplot2::geom_bar(stat = "identity", fill = "blue") +
+    ggplot2::geom_col(fill = "blue") +
     ggplot2::labs(
-      title = paste("Count of Grants In", x),
+      title = paste("Count of Grants in", x),
       x = x,
       y = "Count of Grants"
     ) +
     ggplot2::theme_minimal() +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
 
-  return(plot = p2
-  )
+  return(p2)
 }
 
-
-#' #Organization Size and Amount: This scatter plot will show the relationship between organization size and grant amount
-#' x axis = Organization Size
-#' y axis = Amount
+#' Organization Size vs Amount
 #'
+#' @param data A dataset
+#' @param x Name of org size column (string)
+#' @param y Name of amount column (string)
+#' @return A ggplot object
+#' @export
 summarize_orgsize_amount <- function(data, x = NULL, y = NULL) {
   if (is.null(x) || is.null(y)) {
     stop("Please provide column names.")
   }
+
   p3 <- ggplot2::ggplot(
     data,
     ggplot2::aes(x = .data[[x]], y = .data[[y]])
@@ -89,15 +91,48 @@ summarize_orgsize_amount <- function(data, x = NULL, y = NULL) {
     ) +
     ggplot2::theme_minimal()
 
-  return(plot = p3
-  )
+  return(p3)
 }
 
+#' Time Series of Amount Over Year
+#'
+#' @param data A dataset
+#' @param x Name of year column (string)
+#' @param y Name of amount column (string)
+#' @return A ggplot object
+#' @export
+time_series_amount_year <- function(data, x = "year", y = "amount") {
 
+  p4 <- ggplot2::ggplot(
+    data,
+    ggplot2::aes(x = .data[[x]], y = .data[[y]])
+  ) +
+    ggplot2::geom_line(color = "purple", linewidth = 1) +
+    ggplot2::geom_point(color = "purple", size = 2) +
+    ggplot2::labs(
+      title = paste("Time Series of", y, "over", x),
+      x = x,
+      y = y
+    ) +
+    ggplot2::theme_minimal()
 
+  return(p4)
+}
 
+#' Combine All Automatic Plots
+#'
+#' @param data A dataset
+#' @return A combined patchwork plot
+#' @export
+combine_auto_plots <- function(data) {
 
+  p1 <- summarize_amount_avg_year(data, x = "year", y = "amount")
+  p2 <- summarize_location_count(data, x = "location")
+  p3 <- summarize_orgsize_amount(data, x = "org_size", y = "amount")
+  p4 <- time_series_amount_year(data, x = "year", y = "amount")
 
+  combined_plot <- p1 / p2 / p3 / p4 +
+    patchwork::plot_layout(ncol = 1)
 
-
-
+  return(combined_plot)
+}
