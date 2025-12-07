@@ -5,7 +5,7 @@ An R package for exploratory analysis of NGO funding data with automated visuali
 ## Installation
 ```r
 # Install from GitHub
-devtools::install_github("yourusername/NGOReportR")
+devtools::install_github("radiah23/NGOReportR")
 ```
 
 ## Features
