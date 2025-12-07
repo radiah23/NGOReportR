@@ -1,6 +1,6 @@
 Package: NGOReportR
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Automated Reporting Tools for NGOs
 Version: 0.1.0
 Authors@R: c(
     person(
@@ -9,9 +9,10 @@ Authors@R: c(
       role = c("aut", "cre")
     )
   )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
-License: What license is it under?
+Description: Generate consistent, reproducible reports for non-governmental
+    organization projects. Provides helpers for data preparation, templated
+    reporting, and quick quality checks so teams can share results faster.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.3
