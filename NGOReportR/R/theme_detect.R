@@ -7,7 +7,9 @@
 #' @param data A dataset containing a purpose text column
 #' @param purpose_column Name of the Purpose column (string)
 #' @return Data with added `theme` column
+#' @importFrom qdap freq_terms polarity
 #' @export
+
 
 detect_funding_themes_qdap <- function(data, purpose_column = "purpose") {
 
@@ -87,7 +89,6 @@ ggplot_funding_themes <- function(data, theme_column = "theme_qdap") {
 
   return(p)
 }
-
 
 
 
