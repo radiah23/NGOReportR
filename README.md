@@ -44,8 +44,8 @@ Built on tidyverse: dplyr, ggplot2, patchwork, cli, skimr, car, qdap
 
 ## License
 
-[Your license]
+MIT 
 
 ---
 
-**Questions?** Open an issue on [GitHub](https://github.com/yourusername/NGOReportR)
+
