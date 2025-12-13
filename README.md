@@ -1,51 +1,19 @@
 # NGOReportR
 
-An R package for exploratory analysis of NGO funding data with automated visualizations, regression diagnostics, and text-based theme detection.
+NGOReportR is an R package explicitly built to provide exploratory data analysis (EDA) and reporting workflows for NGO (Non-Governmental Organization) funding datasets. It encompasses data validation, statistical modeling, visualizations, and text-based thematic explorations.
 
 ## Installation
-```r
-# Install from GitHub
+```R
+# Use devtools to install directly from GitHub
 devtools::install_github("radiah23/NGOReportR")
 ```
 
-## Features
+## Core Features
 
-- **Data validation** - Quick quality checks with `validate_data()`
-- **Automated plots** - Generate and export funding visualizations to PDF
-- **Regression analysis** - Linear and logistic models with built-in diagnostics (VIF, Cook's distance, LINE assumptions, AUC)
-- **Theme detection** - Classify grant purposes using keyword dictionaries (education, health, climate, etc.)
-
-## Quick Start
-```r
-library(NGOReportR)
-
-# Validate data
-validate_data(grant_data)
-
-# Generate visual exploratory analysis
-export_auto_plots_pdf(grant_data, "analysis.pdf")
-
-# Run comprehensive regression report
-report <- generate_ngo_report(
-  data = grant_data,
-  linear_response = "funding_amount",
-  logistic_response = "funded",
-  predictors = c("org_size", "location", "sector")
-)
-
-# Detect and visualize grant themes
-themed_data <- detect_funding_themes_qdap(grant_data, "grant_purpose")
-ggplot_funding_themes(themed_data)
-```
-
-## Dependencies
-
-Built on tidyverse: dplyr, ggplot2, patchwork, cli, skimr, car, qdap
-
-## License
-
-MIT 
-
----
-
-
+- **Data Validation**: Perform rapid quality assurance checks via `validate_data()`.
+- **Visualization**: Automatically generate graphical insights from funding datasets, which can be exported directly to PDF with `export_auto_plots_pdf()`.
+- **Regression Modeling Analysis**: Supports running both linear and logistic regressions with diagnostics like Variance Inflation Factors (VIF), Cook's distance, and ROC/AUC depending on suitability.
+- **Text Mining & Classification of Themes (Theme Detection)**: Analyze unstructured text describing grants such as "allocation themes tied explicitly NGO scope values (Health/Agric).
+- Pre-built Reporting Layout Formatting & coupled analysis capabilities.
+End analysis between each relational block subset
+Running" etc focusing overlap logic User immediately still applicable tabling equations sample data-compression displaying trends exemplified.
